@@ -3,7 +3,7 @@ import json
 from flask_cors import CORS
 from urllib.parse import urlencode
 
-from flask import Flask, jsonify, request, redirect
+from flask import Flask, jsonify, request, redirect, render_template
 from werkzeug import secure_filename
 import pandas as pd
 
@@ -36,12 +36,10 @@ def upload_file():
 
 @app.route("/get/<filename>", methods=["GET"])
 def get_data(filename):
-    print('here')
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], secure_filename("{}.csv".format(filename)))
     delimiter = request.args.get("delimiter", ",")
     try:
         df = pd.read_csv(file_path, delimiter=delimiter)
-        print(df.head())
     except pd.errors.ParserError:
         return "Invalid delimeter.", 400
 
@@ -55,6 +53,11 @@ def get_data(filename):
 
     data = json.loads(df.to_json(orient='records'))
     return jsonify(filename=filename, data=data), 200
+
+
+@app.route("/")
+def home():
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
