@@ -45,7 +45,7 @@ function upload() {
     }
   };
 
-  xhr.open('POST', 'http://localhost:8181/uploader');
+  xhr.open('POST', '/uploader');
   xhr.send(FD);
 }
 
