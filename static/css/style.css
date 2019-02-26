@@ -1,9 +1,6 @@
 body {
   background: #f3f3f3
 }
-.center{
-	margin: 0 auto;
-}
 
 .h-scroll {
   overflow-y: auto;

@@ -45,7 +45,7 @@ function upload() {
     }
   };
 
-  xhr.open('POST', '/uploader');
+  xhr.open('POST', 'http://localhost:8181/uploader');
   xhr.send(FD);
 }
 
@@ -89,5 +89,6 @@ function createTable(response) {
 
 
   tableElement.appendChild(tbdy);
+  $('#data').DataTable();
 }
 
